@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
-import { UsersPage } from './pages/users/users.page';
 import { ProductsPage } from './pages/products/products.page';
+import { UsersPage } from './pages/users/users.page';
+import { Categories } from './services/categories';
+import { Orders } from './services/orders';
+import { Reviews } from './services/reviews';
 
 /**
  * Definición de las rutas principales de la aplicación.
@@ -36,6 +39,36 @@ export const routes: Routes = [
    * de mostrar y gestionar el listado de productos.
    */
   { path: 'products', component: ProductsPage },
+
+  /**
+   * Ruta de categorías.
+   *
+   * @remarks
+   * Renderiza el componente `Categories`, encargado
+   * de mostrar y gestionar el listado de categorías.
+   */
+
+  { path: 'categories', component: Categories },
+
+  /**
+   * Ruta de órdenes.
+   *
+   * @remarks
+   * Renderiza el componente `Orders`, encargado
+   * de mostrar y gestionar el listado de órdenes.
+   */
+
+  {path: 'orders', component: Orders},
+
+  /**
+   * Ruta de reseñas.
+   *
+   * @remarks
+   * Renderiza el componente `Reviews`, encargado
+   * de mostrar y gestionar el listado de reseñas.
+   */
+
+  { path: 'reviews', component: Reviews },
 
   /**
    * Ruta comodín.
