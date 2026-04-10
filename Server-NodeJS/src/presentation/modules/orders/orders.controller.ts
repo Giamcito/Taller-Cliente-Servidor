@@ -11,9 +11,11 @@ export class OrdersController {
 	getAllOrders = (req: Request, res: Response): void => {
 		const { countOrders } = req.params;
 
-		this.ordersService
-			.getAllOrders(Number(countOrders))
-			.then((orders) => res.status(200).json(orders))
-			.catch((error) => HandleError.error(error, res));
+		setTimeout(() => {
+			this.ordersService
+				.getAllOrders(Number(countOrders))
+				.then((orders) => res.status(200).json(orders))
+				.catch((error) => HandleError.error(error, res));
+		}, 3000);
 	};
 }

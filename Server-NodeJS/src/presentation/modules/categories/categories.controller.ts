@@ -11,9 +11,11 @@ export class CategoriesController {
 	getAllCategories = (req: Request, res: Response): void => {
 		const { countCategories } = req.params;
 
-		this.categoriesService
-			.getAllCategories(Number(countCategories))
-			.then((categories) => res.status(200).json(categories))
-			.catch((error) => HandleError.error(error, res));
+		setTimeout(() => {
+			this.categoriesService
+				.getAllCategories(Number(countCategories))
+				.then((categories) => res.status(200).json(categories))
+				.catch((error) => HandleError.error(error, res));
+		}, 3000);
 	};
 }

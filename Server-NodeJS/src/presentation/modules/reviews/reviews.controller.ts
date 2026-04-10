@@ -11,9 +11,11 @@ export class ReviewsController {
 	getAllReviews = (req: Request, res: Response): void => {
 		const { countReviews } = req.params;
 
-		this.reviewsService
-			.getAllReviews(Number(countReviews))
-			.then((reviews) => res.status(200).json(reviews))
-			.catch((error) => HandleError.error(error, res));
+		setTimeout(() => {
+			this.reviewsService
+				.getAllReviews(Number(countReviews))
+				.then((reviews) => res.status(200).json(reviews))
+				.catch((error) => HandleError.error(error, res));
+		}, 3000);
 	};
 }
