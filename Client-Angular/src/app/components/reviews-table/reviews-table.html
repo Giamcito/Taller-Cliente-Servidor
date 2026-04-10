@@ -1,1 +1,24 @@
-<p>reviews-table works!</p>
+<table class="table table-striped border">
+	<thead>
+		<tr>
+			<th scope="col">Id</th>
+			<th scope="col">Autor</th>
+			<th scope="col">Producto</th>
+			<th scope="col">Calificación</th>
+			<th scope="col">Comentario</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (review of reviews; track review) {
+			<tr>
+				<th scope="row">{{ review.id }}</th>
+				<td>{{ review.author }}</td>
+				<td>{{ review.productName }}</td>
+				<td>
+					<dsb-badge-atom [text]="review.rating.toString()" [type]="getBadgeType(review.rating)"></dsb-badge-atom>
+				</td>
+				<td>{{ review.comment }}</td>
+			</tr>
+		}
+	</tbody>
+</table>

@@ -1,1 +1,16 @@
+@switch(state){
+
+	@case('loading'){
+		<app-alert alertState="loading" text="Cargando órdenes..." ></app-alert>
+	}
+
+	@case('error'){
+		<app-alert alertState="error" text="Error al cargar las órdenes" ></app-alert>
+	}
+
+	@case('success'){
+		<app-orders-table [orders]="orders" ></app-orders-table>
+	}
+
+}
 <p>orders works!</p>

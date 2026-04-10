@@ -1,1 +1,24 @@
-<p>orders-table works!</p>
+<table class="table table-striped border">
+	<thead>
+		<tr>
+			<th scope="col">Id</th>
+			<th scope="col">Cliente</th>
+			<th scope="col">Total</th>
+			<th scope="col">Estado</th>
+			<th scope="col">Creada</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (order of orders; track order) {
+			<tr>
+				<th scope="row">{{ order.id }}</th>
+				<td>{{ order.customerName }}</td>
+				<td>{{ order.total }}</td>
+				<td>
+					<dsb-badge-atom [text]="order.status" [type]="getBadgeType(order.status)"></dsb-badge-atom>
+				</td>
+				<td>{{ order.createdAt }}</td>
+			</tr>
+		}
+	</tbody>
+</table>

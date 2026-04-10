@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { CategoriesTable } from './components/categories-table/categories-table';
-import { OrdersTable } from './components/orders-table/orders-table';
-import { ReviewsTable } from './components/reviews-table/reviews-table';
+import { Categories } from './pages/categories/categories';
+import { Orders } from './pages/orders/orders';
 import { ProductsPage } from './pages/products/products.page';
+import { Reviews } from './pages/reviews/reviews';
 import { UsersPage } from './pages/users/users.page';
 
 /**
@@ -48,7 +48,7 @@ export const routes: Routes = [
    * de mostrar y gestionar el listado de categorías.
    */
 
-  { path: 'categories', component: CategoriesTable },
+  { path: 'categories', component: Categories },
 
   /**
    * Ruta de órdenes.
@@ -58,7 +58,7 @@ export const routes: Routes = [
    * de mostrar y gestionar el listado de órdenes.
    */
 
-  {path: 'orders', component: OrdersTable },
+  { path: 'orders', component: Orders },
 
   /**
    * Ruta de reseñas.
@@ -68,7 +68,7 @@ export const routes: Routes = [
    * de mostrar y gestionar el listado de reseñas.
    */
 
-  { path: 'reviews', component: ReviewsTable },
+  { path: 'reviews', component: Reviews },
 
   /**
    * Ruta comodín.
