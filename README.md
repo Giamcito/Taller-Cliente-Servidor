@@ -51,8 +51,104 @@ Aqui encontraras toda la información necesaria respecto al consumo de cada API 
 
 Debemos poder observar una respuesta mediante un navegador web o el promagrama Postman de las siguientes urls:
 
-- `http://localhost:3000/api/users`
-- `http://localhost:3000/api/products`
+- `http://localhost:3000/api/users/5`
+- `http://localhost:3000/api/products/5`
+- `http://localhost:3000/api/orders/5`
+- `http://localhost:3000/api/categories/5`
+- `http://localhost:3000/api/reviews/5`
+
+## 🧩 Documentación Técnica del Backend (Server-NodeJS)
+
+### Arquitectura
+
+El backend está construido con Node.js + Express + TypeScript y usa una arquitectura en capas:
+
+- `src/app.ts`: Punto de entrada. Crea la instancia del servidor y lo inicia.
+- `src/presentation/server.ts`: Configura middlewares, rutas, Swagger UI y la estrategia SPA fallback.
+- `src/presentation/routes.ts`: Registra todas las rutas de módulos API.
+- `src/presentation/modules/*`: Implementación por módulo (routes, controller, service).
+- `src/domain/interfaces/*`: Contratos de tipos del dominio.
+- `src/domain/erros/*`: Errores de dominio y manejo centralizado de errores.
+- `src/config/*`: Variables de entorno y configuración Swagger.
+
+### Módulos de API
+
+Actualmente el backend expone 5 módulos:
+
+- Users
+- Products
+- Orders
+- Categories
+- Reviews
+
+Cada módulo implementa el patrón:
+
+- `*.routes.ts`: Define endpoints HTTP y comentarios `@openapi`.
+- `*.controller.ts`: Orquesta request/response, parsea parámetros y maneja errores.
+- `*.service.ts`: Lógica de negocio y generación de datos mock con `@faker-js/faker`.
+
+### Endpoints disponibles
+
+Todos los endpoints son `GET` y reciben cantidad por parámetro de ruta:
+
+- `GET /api/users/{countUsers}`
+- `GET /api/products/{countProducts}`
+- `GET /api/orders/{countOrders}`
+- `GET /api/categories/{countCategories}`
+- `GET /api/reviews/{countReviews}`
+
+Ejemplo:
+
+```http
+GET http://localhost:3000/api/orders/5
+```
+
+Respuesta esperada:
+
+- `200 OK`: arreglo JSON con la cantidad solicitada.
+- `400 Bad Request`: parámetro inválido.
+- `500 Internal Server Error`: error no controlado.
+
+### Swagger (OpenAPI)
+
+La documentación OpenAPI se genera con:
+
+- `swagger-jsdoc`: extrae anotaciones `@openapi` desde rutas y schemas.
+- `swagger-ui-express`: publica la UI en `/api/docs`.
+
+Fuente de documentación:
+
+- Endpoints: comentarios `@openapi` en `src/presentation/modules/**/*.routes.ts`
+- Schemas: `src/config/swagger.schemas.ts`
+
+URL de documentación:
+
+- `http://localhost:3000/api/docs`
+
+### Variables de entorno
+
+Variables usadas por backend:
+
+- `PORT`: puerto HTTP del servidor (requerido).
+- `PUBLIC_PATH`: ruta de archivos estáticos (por defecto `public`).
+
+### Flujo de una petición
+
+1. El cliente invoca un endpoint en `/api/<modulo>/<cantidad>`.
+2. El router del módulo delega al controlador.
+3. El controlador valida/parsa parámetros y llama al servicio.
+4. El servicio genera y retorna datos mock tipados.
+5. El controlador responde JSON con estado HTTP apropiado.
+
+### Ejecución en desarrollo
+
+Script backend disponible:
+
+```bash
+npm run start
+```
+
+Este comando usa `ts-node-dev` para recarga automática en cambios.
 
 ## ▶️ Iniciar el Client (Client-Angular) en Modo Desarrollo
 
